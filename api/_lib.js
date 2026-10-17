@@ -1,6 +1,9 @@
 import { put, list } from '@vercel/blob';
 // Finds the Blob token even if the store was connected with a custom prefix (e.g. STORAGE_READ_WRITE_TOKEN).
-const TOKEN = () => process.env.BLOB_READ_WRITE_TOKEN || process.env[Object.keys(process.env).find((k) => /READ_WRITE_TOKEN$/.test(k)) || ''] || '';
+const TOKEN = () => {
+  const raw = process.env.BLOB_READ_WRITE_TOKEN || process.env[Object.keys(process.env).find((k) => /READ_WRITE_TOKEN$/.test(k)) || ''] || '';
+  return String(raw).trim().replace(/^['"]+|['"]+$/g, '').trim();
+};
 export const authed = (req) => !!process.env.ADMIN_PASSWORD && req.headers['x-admin-password'] === process.env.ADMIN_PASSWORD;
 
 // Works whether the Blob store is Public or Private.
