@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>KW-EG dictionary | Knowledge book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/page.css">
+<style>
+/* Dictionary page, built on the shared page.css */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{max-width:960px;margin:0 auto;padding:14px 20px;display:flex;flex-direction:column;gap:12px}
+.search{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:0 18px}
+.search:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
+.search svg{flex:none;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:1.05rem;padding:12px 0;outline:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{font:inherit;font-weight:600;font-size:.88rem;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:5px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--gold)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.count{margin-inline-start:auto;color:var(--muted);font-size:.88rem;font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 18px 8px;color:var(--muted);font-size:.82rem;font-weight:700}
+.cols span:last-child{color:var(--gold)}
+.group{margin:26px 0 12px;font-weight:800;font-size:1.15rem;color:var(--head);display:flex;align-items:center;gap:10px;border:0;padding:0}
+.group::after{content:"";flex:1;height:1px;background:linear-gradient(270deg,var(--line),var(--line))}
+.group::before{content:"";width:4px;height:1.1em;background:var(--gold);border-radius:2px}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;box-shadow:var(--shadow)}
+.row .e{color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.row .k{font-weight:700;font-size:1.1rem;color:var(--head);min-width:0;overflow-wrap:anywhere;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.copy{flex:none;font:inherit;font-size:.75rem;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:3px 10px;cursor:pointer}
+.copy:hover{color:var(--gold);border-color:var(--gold)}
+.copy.done{background:color-mix(in srgb,var(--gold) 15%,var(--card));color:var(--gold);border-color:var(--gold)}
+.empty{text-align:center;color:var(--muted);padding:48px 0}
+.head-only{padding-bottom:0}
+@media (max-width:560px){
+  .cols{display:none}
+  .row{grid-template-columns:1fr;gap:2px}
+  .row .e::before{content:"مصري: ";font-size:.75rem}
+  .bar .wrap{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+<div class="page head-only">
+<header class="page-head">
+  <h1>قاموس اللهجة الكويتية</h1>
+  <p>ثقافة العميل الكويتي: الكلمة المصرية وما يقابلها بالكويتي</p>
+  <div class="rule"></div>
+</header>
+</div>
+<div class="bar"><div class="wrap">
+  <label class="search" for="q">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+    <input id="q" type="search" placeholder="ابحث بالمصري أو بالكويتي…" autocomplete="off">
+  </label>
+  <div class="chips" id="chips"></div>
+</div></div>
+<main class="page">
+  <div class="cols" aria-hidden="true"><span>باللهجة المصرية</span><span>بالكويتي</span></div>
+  <div id="out"></div>
+  <p class="empty" id="empty" hidden>لا توجد نتائج. جرّب كلمة أخرى.</p>
+</main>
+<script>
+var DATA=[{"e": "بعد اذنك -لو سمحت", "k": "ما عليك أمر", "c": 0}, {"e": "المقعد / القعدة / المجلس", "k": "ديوان", "c": 0}, {"e": "صحابي / أصحابي / الشلة بتاعتي", "k": "ربعي", "c": 0}, {"e": "رحله", "k": "سفره", "c": 0}, {"e": "ارسلي/ ابعتلي", "k": "طرشلي/ديزيلي", "c": 0}, {"e": "لا تقلق- لا تخاف", "k": "لا تحاتي", "c": 0}, {"e": "شباك الطائره", "k": "الدريشه", "c": 0}, {"e": "وجبة الأفطار", "k": "الريوق", "c": 0}, {"e": "لا  يوجد", "k": "ماكو", "c": 0}, {"e": "ايه الأخبار", "k": "شكو ماكو", "c": 0}, {"e": "عامل ايه", "k": "شلونك", "c": 0}, {"e": "تمام", "k": "زين", "c": 0}, {"e": "دلوقتي", "k": "الحين", "c": 0}, {"e": "سيىء", "k": "خايس", "c": 0}, {"e": "بكرة", "k": "باچر", "c": 0}, {"e": "امبارح", "k": "أمس", "c": 0}, {"e": "أوي / جدًا", "k": "وايد", "c": 0}, {"e": "شوية", "k": "شوي", "c": 0}, {"e": "جامد / حلو", "k": "خوش", "c": 0}, {"e": "ادخل-افتح", "k": "دش", "c": 0}, {"e": "خرج", "k": "طلع", "c": 0}, {"e": "عيل صغير-طفل", "k": "ياهل", "c": 0}, {"e": "ست / زوجة", "k": "حرمة", "c": 0}, {"e": "راجل / زوج", "k": "ريال", "c": 0}, {"e": "كداب", "k": "جذاب", "c": 0}, {"e": "أعتقد", "k": "هقوتي", "c": 0}, {"e": "فاكر", "k": "عبالك", "c": 0}, {"e": "على طول", "k": "سيدا", "c": 0}, {"e": "مستني", "k": "ناطر", "c": 0}, {"e": "لسه حالًا", "k": "توني", "c": 0}, {"e": "مشتاق", "k": "ولهان", "c": 0}, {"e": "يرغي", "k": "يقرقع", "c": 0}, {"e": "يلف", "k": "يفتر", "c": 0}, {"e": "شبشب", "k": "نعال", "c": 0}, {"e": "طريق", "k": "درب", "c": 0}, {"e": "أريد", "k": "أبي", "c": 0}, {"e": "قدام", "k": "جدام", "c": 0}, {"e": "عندك", "k": "يمك", "c": 0}, {"e": "ليه كده", "k": "اشدعوة", "c": 0}, {"e": "برافو", "k": "عفيه", "c": 0}, {"e": "اسكت", "k": "انطم", "c": 0}, {"e": "مجنون", "k": "خبّل", "c": 0}, {"e": "حشرية", "k": "لقافه", "c": 0}, {"e": "رغي", "k": "قرقه", "c": 0}, {"e": "سرحان", "k": "فاهي", "c": 0}, {"e": "طنّش-تجاهل", "k": "طاف", "c": 0}, {"e": "يبص", "k": "يطالع", "c": 0}, {"e": "ينبسط", "k": "يستانس", "c": 0}, {"e": "متنرفز", "k": "معصب", "c": 0}, {"e": "جدعنة", "k": "فزعة", "c": 0}, {"e": "شيك", "k": "كاشخ", "c": 0}, {"e": "خناقة", "k": "دق خشوم", "c": 0}, {"e": "هبد", "k": "سفلقة", "c": 0}, {"e": "يزعج", "k": "يتلزق", "c": 0}, {"e": "خبز", "k": "خبزة", "c": 0}, {"e": "تشرب شاي؟", "k": "تشرب جاي؟", "c": 0}, {"e": "بكام؟", "k": "جم؟", "c": 0}, {"e": "عادي-لا بأس", "k": "ما عليه", "c": 0}, {"e": "يا خسارة", "k": "أفا", "c": 0}, {"e": "مساء الخير", "k": "الله بالخير", "c": 0}, {"e": "تلغي", "k": "تكنسل", "c": 1}, {"e": "حجز", "k": "بوكنج", "c": 1}, {"e": "تسجيل دخول", "k": "تشيك إن", "c": 1}, {"e": "خروج من الفندق", "k": "تشيك أوت", "c": 1}, {"e": "رحلة طيران فيها  توقف", "k": "ترانزيت", "c": 1}, {"e": "مباشر-رحله بدون توقف", "k": "دايركت", "c": 1}, {"e": "ذهاب فقط", "k": "ون واي", "c": 1}, {"e": "ذهاب وعودة", "k": "راوند ترب", "c": 1}, {"e": "ترقية", "k": "أبغريد", "c": 1}, {"e": "بطاقة الصعود للطائرة", "k": "بوردنق", "c": 1}, {"e": "مكتب المطار", "k": "الكاونتر", "c": 1}, {"e": "الأمتعة", "k": "الشنط", "c": 1}, {"e": "الوزن زيادة", "k": "الوزن زايد", "c": 1}, {"e": "الباسبور", "k": "الجواز", "c": 1}, {"e": "التأشيرة", "k": "الفيزا", "c": 1}, {"e": "الرحلة اتلغت", "k": "الرحلة تكنسلت", "c": 1}, {"e": "كرسي طرقة", "k": "مقعد عالطريج", "c": 1}, {"e": "فندق", "k": "أوتيل", "c": 1}, {"e": "ريزورت", "k": "منتجع", "c": 1}, {"e": "ريسبشن", "k": "استقبال", "c": 1}, {"e": "موقع", "k": "لوكيشن", "c": 1}, {"e": "قريب من وسط البلد", "k": "قريب من السنتر", "c": 1}, {"e": "برنامج الرحلة", "k": "جدول الرحلة", "c": 1}, {"e": "باكدج", "k": "بكج", "c": 1}, {"e": "عرض جامد جدًا", "k": "عرض وايد زين", "c": 1}, {"e": "أوضة فردي", "k": "سنقل روم", "c": 1}, {"e": "رحلة", "k": "تريب", "c": 1}, {"e": "رحلة بحرية", "k": "كروز", "c": 1}, {"e": "عربية بسواق", "k": "سيارة مع سايق", "c": 1}, {"e": "استقبال من المطار", "k": "استلام من المطار", "c": 1}, {"e": "Guide", "k": "مرشد سياحي", "c": 1}, {"e": "نشاط", "k": "فعالية", "c": 1}, {"e": "تذكرة دخول", "k": "دخولية", "c": 1}, {"e": "سيزون", "k": "موسم", "c": 1}, {"e": "موجود", "k": "متوفر", "c": 1}, {"e": "كامل", "k": "فول", "c": 1}, {"e": "بكام السعر؟", "k": "بكم التكلفة؟", "c": 2}, {"e": "باكدجات سفر -باقات سفر", "k": "عندكم عروض؟", "c": 2}, {"e": "الرحلة جميلة جدًا", "k": "الرحلة وايد حلوة", "c": 2}, {"e": "العميل ينبسط", "k": "يستانس العميل", "c": 2}, {"e": "خدمة سريعة", "k": "فزعة", "c": 2}, {"e": "ابعت الفلوس", "k": "حول المبلغ", "c": 2}, {"e": "مقدم", "k": "عربون", "c": 2}, {"e": "كلمني", "k": "دق على", "c": 2}, {"e": "فى ايه", "k": "شنو السالفه", "c": 2}, {"e": "مين معايا", "k": "منو معاي", "c": 2}], CATS=["كلام يومي", "سفر وحجز", "مبيعات وخدمة العميل"], cat=-1;
+var out=document.getElementById('out'), q=document.getElementById('q'), chips=document.getElementById('chips'), empty=document.getElementById('empty');
+function norm(s){return s.toLowerCase().replace(/[ً-ٟـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي');}
+DATA.forEach(function(d){d.n=norm(d.e+' '+d.k)});
+var cnt=document.createElement('span');cnt.className='count';
+function mkChips(){
+  chips.innerHTML='';
+  ['الكل'].concat(CATS).forEach(function(n,i){
+    var b=document.createElement('button');b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',String(cat===i-1));
+    b.onclick=function(){cat=i-1;mkChips();render()};chips.appendChild(b);
+  });
+  chips.appendChild(cnt);
+}
+function copy(btn,t){
+  function ok(){btn.classList.add('done');btn.textContent='تم النسخ';setTimeout(function(){btn.classList.remove('done');btn.textContent='نسخ'},1200)}
+  function fallback(){
+    var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(a);a.select();
+    try{if(document.execCommand('copy'))ok()}catch(e){}
+    document.body.removeChild(a);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback)}else fallback();
+}
+function render(){
+  var s=norm(q.value.trim()), n=0; out.innerHTML='';
+  CATS.forEach(function(name,ci){
+    if(cat!==-1&&cat!==ci)return;
+    var items=DATA.filter(function(d){return d.c===ci&&(!s||d.n.indexOf(s)>-1)});
+    if(!items.length)return;
+    n+=items.length;
+    var h=document.createElement('h2');h.className='group';h.textContent=name;out.appendChild(h);
+    var l=document.createElement('div');l.className='list';
+    items.forEach(function(d){
+      var r=document.createElement('div');r.className='row';
+      var e=document.createElement('div');e.className='e';e.textContent=d.e;
+      var k=document.createElement('div');k.className='k';
+      var t=document.createElement('span');t.textContent=d.k;
+      var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='نسخ';b.setAttribute('aria-label','نسخ '+d.k);
+      b.onclick=function(){copy(b,d.k)};
+      k.appendChild(t);k.appendChild(b);r.appendChild(e);r.appendChild(k);l.appendChild(r);
+    });
+    out.appendChild(l);
+  });
+  cnt.textContent=n+' مصطلح';empty.hidden=n>0;
+}
+q.addEventListener('input',render);
+mkChips();render();
+</script>
+</body>
+</html>

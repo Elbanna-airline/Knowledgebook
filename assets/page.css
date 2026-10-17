@@ -1,0 +1,101 @@
+/* Knowledge book - shared design for every page inside content/
+   Same palette, font and card language as index.html */
+
+:root{
+  --navy:#06335c; --royal:#0860aa; --teal:#0b8a98; --gold:#f5891f; --gold2:#ffa24a;
+  --red:#d1343c; --ok:#1e8e5a;
+  --bg:#f5f3ee; --card:#ffffff; --tint:#f8f6f1; --ink:#18203a; --muted:#66707f; --line:#e4e0d6;
+  --head:#06335c;           /* heading colour */
+  --accent:#0860aa; --on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(22,29,46,.05),0 10px 24px -14px rgba(22,29,46,.28);
+  --mono:"Cascadia Mono","SFMono-Regular",Consolas,"Courier New",monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#111726; --card:#1a2336; --tint:#151d2f; --ink:#eef1f7; --muted:#a3aec2; --line:#2b3650;
+    --head:#eef1f7; --royal:#7db7ee; --teal:#5fd0dc; --gold:#ffa24a; --red:#ff7b80; --ok:#5fd09a;
+    --accent:#ffa24a; --on-accent:#06335c;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Cairo",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  font-size:16px;line-height:1.8;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--royal);text-underline-offset:3px}
+a:hover{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* ---------- page frame ---------- */
+.page{max-width:960px;margin:0 auto;padding:30px 20px 64px}
+.page-head{margin-bottom:22px}
+.page-head h1{
+  margin:0;font-size:clamp(1.55rem,3.6vw,2.1rem);line-height:1.25;font-weight:800;
+  letter-spacing:-.01em;color:var(--head);text-wrap:balance;
+}
+.page-head p{margin:6px 0 0;color:var(--muted);font-size:.98rem}
+.rule{height:1px;margin:14px 0 0;background:linear-gradient(90deg,var(--gold) 0,var(--gold) 56px,var(--line) 56px)}
+[dir=rtl] .rule{background:linear-gradient(270deg,var(--gold) 0,var(--gold) 56px,var(--line) 56px)}
+
+/* ---------- cards & headings ---------- */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  box-shadow:var(--shadow);padding:20px 24px;margin:16px 0;
+}
+.card>:first-child{margin-top:0}
+.card>:last-child{margin-bottom:0}
+h2{
+  margin:1.5em 0 .6em;font-size:1.2rem;font-weight:700;line-height:1.4;color:var(--head);
+  border-inline-start:4px solid var(--gold);padding-inline-start:12px;
+}
+.card h2:first-child{margin-top:0}
+h3{margin:1.2em 0 .5em;font-size:1.02rem;font-weight:700;color:var(--head)}
+p{margin:.6em 0}
+ul,ol{padding-inline-start:24px;margin:.6em 0}
+li{margin:.3em 0}
+
+/* ---------- content blocks ---------- */
+.card img,.gallery img{border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--tint)}
+.gallery{display:grid;gap:16px;margin:16px 0}
+
+.links{list-style:none;padding:0}
+.links li{padding:6px 0}
+
+.callout{
+  margin:14px 0;padding:12px 16px;border-radius:8px;font-size:.95rem;
+  background:color-mix(in srgb,var(--gold) 11%,var(--card));
+  border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line));
+  border-inline-start:4px solid var(--gold);
+}
+.todo{
+  margin:14px 0 0;padding:10px 14px;border:1px dashed var(--line);border-radius:8px;
+  color:var(--muted);font-size:.9rem;background:var(--tint);
+}
+
+pre.msg{
+  margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.95;
+  padding:16px 20px;background:var(--tint);border:1px solid var(--line);
+  border-inline-start:4px solid var(--gold);border-radius:8px;
+}
+
+.frame{
+  display:block;width:100%;height:80vh;min-height:420px;border:1px solid var(--line);
+  border-radius:10px;background:#fff;
+}
+
+.ltr{direction:ltr;unicode-bidi:embed}
+
+@media (min-width:700px){.gallery.two{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){
+  .page{padding:20px 14px 48px}
+  .card{padding:16px 16px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
