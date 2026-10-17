@@ -11,7 +11,7 @@ var P=[
  ['dictionary.html','Dictionary','KW-EG dictionary','assets/dictionary.svg','Egyptian and Kuwaiti words','in'],
  ['https://www.passportindex.org/passport/kuwait/','Visa index','Visa index','assets/visa-index.webp','Visa requirements by passport','out'],
  ['https://travelate-mu.vercel.app/travelate1.html','Travelate','Travelate','assets/travelate.webp','Our booking platform','out'],
- ['tourism.html','Tourism','Tourism information','assets/tourism.webp','Destinations and hotels','in']
+ ['tourism.html','Tourism','Travel Pro Tips & Destinations','assets/tourism.webp','Destinations and hotels','in']
 ];
 var cur=(location.pathname.split('/').pop()||'index.html');if(cur==='')cur='index.html';
 var chev='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>';
