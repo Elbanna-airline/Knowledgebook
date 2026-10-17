@@ -82,11 +82,7 @@ footer{margin-top:64px}
 @media (prefers-reduced-motion:reduce){a.tile,a.tile .pic img{transition:none}a.tile:hover,a.tile:hover .pic img{transform:none}}
 .grid.five .pic,.grid .pic{height:auto!important}
 
-/* one contrast frame for every logo plate: warm coral against the teal banner */
-a.tile .pic::after{display:block!important;content:"";position:absolute;inset:12px;z-index:2;border:3px solid #f08418;border-radius:14px;pointer-events:none;transition:inset .3s,border-color .3s}
-a.tile:hover .pic::after{inset:8px;border-color:#ffa24a}
-a.tile.wide .pic::after{inset:14px}
-
+/* logo frame removed */
 a.tile:hover,a.tile:focus-visible{border-color:#f08418}
 a.tile:hover .txt::after{background-color:#f08418}
 a.tile.wide small{color:#ffa24a}
@@ -104,7 +100,6 @@ a.tile.wide{background:#dff0f1;border-color:#cfd8e3;min-height:0}
 a.tile.wide .pic{flex:0 0 300px;aspect-ratio:1/1}
 a.tile.wide .txt{position:relative;flex:1;min-width:0;background:url(atlas-banner.webp) center/cover no-repeat;border:0;padding:22px 26px;
   display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:300px}
-a.tile.wide .txt::before{display:block;content:"";position:absolute;inset:14px;border:3px solid #f08418;border-radius:14px;pointer-events:none}
 a.tile.wide .txt::after{display:block;inset-inline-end:34px;bottom:34px}
 a.tile.wide b{position:relative;z-index:1;margin:0 0 6px 0;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.88);color:#07294a;font-size:1rem;font-weight:700;letter-spacing:-.005em;
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);margin-inline-start:6px;margin-bottom:6px}
