@@ -99,3 +99,7 @@ pre.msg{
   .card{padding:16px 16px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+/* video blocks (added from the editor) */
+.video{position:relative;aspect-ratio:16/9;margin:14px 0;border-radius:10px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
