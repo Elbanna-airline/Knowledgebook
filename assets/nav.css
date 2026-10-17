@@ -41,11 +41,22 @@ nav.gnav{display:flex;gap:10px;padding:8px}
 .gnav{border-radius:999px;padding:6px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);box-shadow:0 20px 40px -22px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35)}
 .gnav a.pill,.gnav button.menu-btn{padding:11px 20px;font-weight:600;font-size:.88rem;letter-spacing:.005em;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26);text-shadow:none}
 .gnav a.pill:hover,.gnav button.menu-btn:hover{background:rgba(255,255,255,.26)}
-.gnav a.pill.on{background:#fff;color:#081a2e;font-weight:700}
-.gnav button.menu-btn{background:rgba(8,26,46,.55)}
-.gmenu{border-radius:24px;background:rgba(8,26,46,.9);border-color:rgba(255,255,255,.16)}
+.gnav a.pill.on{background:#fff;color:#07294a;font-weight:700}
+.gnav button.menu-btn{background:rgba(7,41,74,.55)}
+.gmenu{border-radius:24px;background:rgba(7,41,74,.9);border-color:rgba(255,255,255,.16)}
 .gmenu a img{border-radius:12px;border:0}
-.gmenu a.on{color:#081a2e}
-.gmenu h6{color:#d2b074}
+.gmenu a.on{color:#07294a}
+.gmenu h6{color:#ffa24a}
 nav.gnav{overflow:visible}
 @media (max-width:700px){.gnav{border-radius:26px}}
+
+/* scroll arrows */
+.gnav .pillwrap{position:relative;flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:8px}
+.gnav .pillwrap .pillrow{-webkit-mask-image:none;mask-image:none;scroll-behavior:smooth}
+.gnav button.arr{flex:none;width:38px;height:38px;padding:0;display:grid;place-items:center;cursor:pointer;color:#fff;border-radius:50%;
+  border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.18);transition:background .16s,opacity .16s,transform .16s}
+.gnav button.arr:hover{background:rgba(255,255,255,.36)}
+.gnav button.arr:active{transform:scale(.94)}
+.gnav button.arr:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.75)}
+.gnav button.arr svg{width:16px;height:16px}
+.gnav button.arr[disabled]{opacity:.3;cursor:default;pointer-events:none}

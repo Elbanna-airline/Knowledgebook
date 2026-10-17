@@ -18,10 +18,10 @@ iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(
 
 
 /* premium top bar */
-.bar{position:relative;z-index:20;background:linear-gradient(120deg,#081a2e 0%,#0d2a47 60%,#12405f 100%);border:0;padding:14px 22px;gap:22px;box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
-.bar::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,rgba(210,176,116,.9),rgba(210,176,116,.15) 40%,transparent)}
+.bar{position:relative;z-index:20;background:linear-gradient(120deg,#07294a 0%,#0a3a66 60%,#0060a8 100%);border:0;padding:14px 22px;gap:22px;box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
+.bar::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,rgba(240,132,24,.95),rgba(240,132,24,.15) 40%,transparent)}
 .lock{border-radius:16px;padding:8px 18px;gap:16px;background:rgba(255,255,255,.97);box-shadow:0 10px 24px -12px rgba(0,0,0,.55)}
 .lock img{height:38px}.lock .tw{height:42px}
-.vr{width:1px;height:28px;background:linear-gradient(transparent,#b8924a,transparent)}
+.vr{width:1px;height:28px;background:linear-gradient(transparent,#f08418,transparent)}
 .bar .gnav{flex:1 1 auto;min-width:0}
 main{z-index:1}

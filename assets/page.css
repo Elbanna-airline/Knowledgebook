@@ -3,10 +3,10 @@
    Same palette, font and card language as index.html */
 
 :root{
-  --navy:#081a2e; --royal:#1c4f82; --teal:#0b8a98; --gold:#b8924a; --gold2:#d2b074;
+  --navy:#07294a; --royal:#0060a8; --teal:#0b8a98; --gold:#f08418; --gold2:#ffa24a;
   --red:#d1343c; --ok:#1e8e5a;
   --bg:#f2f4f6; --card:#ffffff; --tint:#f6f8fa; --ink:#14202e; --muted:#66707f; --line:#dde2e8;
-  --head:#0b1a2b;           /* heading colour */
+  --head:#07294a;           /* heading colour */
   --accent:#1c4f82; --on-accent:#ffffff;
   --shadow:0 1px 2px rgba(22,29,46,.05),0 10px 24px -14px rgba(22,29,46,.28);
   --mono:"Cascadia Mono","SFMono-Regular",Consolas,"Courier New",monospace;
@@ -15,8 +15,8 @@
 @media (prefers-color-scheme:dark){
   :root{
     --bg:#111726; --card:#1a2336; --tint:#151d2f; --ink:#eef1f7; --muted:#a3aec2; --line:#2b3650;
-    --head:#eef1f7; --royal:#7db7ee; --teal:#5fd0dc; --gold:#d2b074; --red:#ff7b80; --ok:#5fd09a;
-    --accent:#d2b074; --on-accent:#081a2e;
+    --head:#eef1f7; --royal:#7db7ee; --teal:#5fd0dc; --gold:#ffa24a; --red:#ff7b80; --ok:#5fd09a;
+    --accent:#ffa24a; --on-accent:#07294a;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 24px -14px rgba(0,0,0,.6);
     color-scheme:dark;
   }
