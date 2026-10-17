@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#06335c">
+<title>Fixed rates sheets/offers | Knowledge book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/inner.css">
+</head>
+<body>
+<header class="bar">
+<a class="lock" href="index.html" aria-label="Home"><img src="assets/qgo.png" alt="Q'go Online"><span class="vr"></span><img class="tw" src="assets/tawasul.png" alt="Tawasul"></a>
+<nav aria-label="Pages"><a href="index.html">Home</a><a href="fixed-rates.html" class="on" aria-current="page">Fixed rates sheets/offers</a><a href="current-offers.html">Current offers</a><a href="https://travel-system.hadysu96.workers.dev/" target="_blank" rel="noopener">Salalah and Umrah blocks tool</a><a href="galileo-pnr.html">Galileo PNR entries</a><a href="playbook.html">Sales operations playbook</a><a href="umrah.html">Umrah information</a><a href="dictionary.html">KW-EG dictionary</a><a href="https://www.passportindex.org/passport/kuwait/" target="_blank" rel="noopener">Visa index</a><a href="https://travelate-mu.vercel.app/travelate1.html" target="_blank" rel="noopener">Travelate</a><a href="tourism.html">Tourism information</a></nav>
+</header>
+<main>
+<iframe id="f" title="Fixed rates sheets/offers" allow="clipboard-write" hidden></iframe>
+<div id="miss" hidden><b>This page is ready, but its content file is missing.</b><br>Put the page's HTML file at <code>content/fixed-rates.html</code> and refresh.</div>
+<noscript><p class="nojs">Please enable JavaScript, or open <a href="content/fixed-rates.html">this page directly</a>.</p></noscript>
+</main>
+<script>
+var f=document.getElementById('f'),m=document.getElementById('miss'),s='content/fixed-rates.html';
+function ok(){f.hidden=false;f.src=s}function no(){m.hidden=false}
+fetch(s,{method:'HEAD'}).then(function(r){r.ok?ok():no()}).catch(ok);
+</script>
+</body>
+</html>

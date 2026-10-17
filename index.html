@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales team knowledge book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hero:url(assets/hero.webp);
+  --navy:#06335c; --navy2:#0a4573; --royal:#0860aa; --teal:#0b8a98; --gold:#f5891f; --gold2:#ffa24a; --red:#d1343c; --sky:#bfeaf0;
+  --bg:#f5f3ee; --card:#ffffff; --ink:#18203a; --muted:#66707f; --line:#e4e0d6;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#111726; --card:#1a2336; --ink:#eef1f7; --muted:#a3aec2; --line:#2b3650; --royal:#7db7ee; --teal:#5fd0dc; --gold:#ffa24a}
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Cairo",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.hero{position:relative;overflow:hidden;background:var(--navy);color:#fff;padding:64px 24px 72px}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(245,137,31,.28);pointer-events:none}
+.hero:before{width:520px;height:520px;right:-120px;top:-210px;box-shadow:0 0 0 46px rgba(245,137,31,.05),0 0 0 47px rgba(245,137,31,.2),0 0 0 100px rgba(245,137,31,.03),0 0 0 101px rgba(245,137,31,.14)}
+.hero:after{width:200px;height:200px;right:120px;top:20px;border-color:rgba(245,137,31,.4)}
+.hero{border-bottom:1px solid var(--gold)}
+.in{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.hero .in{display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-end;justify-content:space-between}
+.hero .mark{display:inline-block;width:46px;height:2px;background:var(--gold2);margin-bottom:20px}
+.hero h1{margin:0 0 12px;font-size:clamp(2.2rem,5.4vw,3.6rem);line-height:1.04;font-weight:800;letter-spacing:-.02em}
+.hero h1 i{font-style:normal;color:var(--gold2)}
+.hero p{margin:0;color:#b9c2d6;max-width:42ch;font-size:1.04rem;font-weight:400}
+.search{flex:1 1 300px;max-width:400px}
+.search input{width:100%;font:inherit;padding:14px 20px;border:1px solid #3c476a;border-radius:999px;background:rgba(10,14,24,.55);color:#fff}
+.search input::placeholder{color:#8d99b5}
+.search input:focus{outline:none;border-color:var(--gold2);box-shadow:0 0 0 3px rgba(245,137,31,.28)}
+main{padding:14px 24px 56px}
+section{margin-top:48px}
+h2{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-.005em;color:var(--ink)}
+.sub{margin:2px 0 8px;color:var(--muted);font-size:.95rem}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold) 0,var(--gold) 56px,var(--line) 56px);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+a.tile{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(22,29,46,.05),0 10px 24px -14px rgba(22,29,46,.28);transition:border-color .18s,transform .18s,box-shadow .18s}
+a.tile:hover,a.tile:focus-visible{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 2px 4px rgba(22,29,46,.06),0 22px 34px -16px rgba(22,29,46,.4);outline:none}
+a.tile:focus-visible{box-shadow:0 0 0 3px var(--gold2)}
+.pic{height:160px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pic img{width:100%;height:100%;display:block}
+.tile .txt{padding:16px 18px 18px;border-top:1px solid var(--line);position:relative}
+.tile .txt:before{content:"";position:absolute;left:18px;top:-1px;width:34px;height:2px;background:var(--gold)}
+.tile b{display:block;font-size:1.05rem;line-height:1.3;font-weight:700}
+.tile .d{display:block;color:var(--muted);font-size:.88rem;margin-top:4px}
+.tile small{display:inline-block;margin-top:12px;font-size:.76rem;color:var(--muted)}
+a.tile.wide{flex-direction:row;background:var(--navy);color:#fff;border-color:var(--navy);min-height:230px}
+a.tile.wide .pic{flex:0 0 min(340px,42%);height:auto}
+a.tile.wide .txt{border-top:0;border-left:1px solid var(--gold);display:flex;flex-direction:column;justify-content:center;padding:30px 36px}
+a.tile.wide .txt:before{display:none}
+a.tile.wide b{font-size:1.7rem;font-weight:800;letter-spacing:-.01em}
+a.tile.wide .d{color:#b9c2d6;font-size:1rem;margin-top:8px;max-width:38ch}
+a.tile.wide small{color:var(--gold2);font-size:.86rem;font-weight:600;margin-top:18px}
+.empty{display:none;margin-top:36px;padding:22px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);text-align:center}
+footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+@media (max-width:600px){.hero{padding:40px 18px 46px}main{padding:6px 16px 36px}a.tile.wide{flex-direction:column}a.tile.wide .pic{flex:none;height:190px}a.tile.wide .txt{border-left:0;border-top:1px solid var(--gold);padding:22px}.hero:before{right:-260px}}
+@media (prefers-reduced-motion:reduce){a.tile{transition:none}a.tile:hover{transform:none}}
+.hero{padding:76px 24px 64px}
+.hero p{font-size:1.1rem}
+.pills{flex-basis:100%;display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;padding-top:28px;border-top:1px solid rgba(245,137,31,.3)}
+.pills a{color:#e9edf6;text-decoration:none;font-weight:600;font-size:.92rem;padding:9px 18px;border:1px solid rgba(245,137,31,.55);border-radius:999px;background:rgba(10,14,24,.35);transition:background .15s,color .15s,border-color .15s}
+.pills a:hover,.pills a:focus-visible{background:var(--gold2);color:var(--navy);border-color:var(--gold2);outline:none}
+.pills a:focus-visible{box-shadow:0 0 0 3px rgba(245,137,31,.4)}
+@media (max-width:600px){.hero{padding:44px 18px 40px}.pills{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.pills a{white-space:nowrap}}
+.hero{background:linear-gradient(90deg,rgba(6,51,92,.6) 0,rgba(6,51,92,.18) 45%,rgba(6,51,92,0) 72%),linear-gradient(180deg,rgba(6,51,92,0) 0,rgba(6,51,92,0) 150px,rgba(6,51,92,.55) 235px,#06335c 306px),var(--hero) center top/100% auto no-repeat,var(--navy);min-height:580px;padding:34px 24px 40px;border-bottom:0;display:flex}
+.hero:before,.hero:after{display:none}
+.hero .in{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:30px;width:100%}
+.lock{align-self:flex-start;display:flex;align-items:center;gap:18px;background:#fff;border-radius:14px;padding:12px 22px;box-shadow:0 12px 30px -12px rgba(0,30,60,.55)}
+.lock img{height:42px;width:auto;display:block}
+.lock .tw{height:46px}
+.lock .vr{width:2px;height:34px;background:linear-gradient(var(--gold),var(--gold2));border-radius:2px}
+.top{width:100%;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
+.hero h1{font-size:clamp(2.5rem,6vw,4.4rem);margin-bottom:14px;text-shadow:0 2px 24px rgba(0,30,60,.35)}
+.hero h1 i{color:var(--gold2)}
+.hero p{color:#e3eef8;font-size:1.15rem;max-width:36ch}
+.search input{background:rgba(255,255,255,.95);color:#06335c;border:2px solid #fff}
+.search input::placeholder{color:#5a7a96}
+.pills{flex-basis:auto;border-top:0;padding-top:0;margin-top:0;gap:12px}
+.pills a{background:var(--royal);color:#fff;border:2px solid #fff;border-radius:14px;padding:11px 20px;font-size:.95rem;font-weight:700;box-shadow:0 8px 18px -8px rgba(0,30,60,.6)}
+.pills a:hover,.pills a:focus-visible{background:var(--gold);color:#fff;border-color:#fff}
+.pills a:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.7)}
+.hero .mark{display:none}
+.tile .txt{border-top:1px solid var(--line)}
+a.tile.wide{background:var(--navy);border-color:var(--navy)}
+a.tile.wide .txt{border-left:3px solid var(--gold)}
+.pic{height:185px}
+@media (max-width:600px){.hero{min-height:0;padding:22px 16px 28px;background:linear-gradient(180deg,rgba(6,51,92,.35) 0,rgba(6,51,92,.15) 25%,#06335c 62%),var(--hero) 74% top/auto 300px no-repeat,var(--navy)}.lock{padding:9px 14px;gap:12px}.lock img{height:32px}.lock .tw{height:36px}.hero h1{font-size:2.3rem}.pills{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}.pills a{white-space:nowrap}}
+.grid.five{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.grid.five .pic{height:160px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="in">
+  <div class="lock"><img src="assets/qgo.png" alt="Q'go Online"><span class="vr"></span><img class="tw" src="assets/tawasul.png" alt="Tawasul QA-Hub"></div>
+  <div class="top">
+    <div>
+      <h1>Sales team<br><i>knowledge book</i></h1>
+      <p>Rates, offers, blocks and booking guides, all in one place. Pick a tool and go.</p>
+    </div>
+    <div class="search"><input id="q" type="search" placeholder="Search: umrah, salalah, visa, galileo..." aria-label="Search the knowledge book" autocomplete="off"></div>
+  </div>
+  <nav class="pills" aria-label="Quick links"><a href="fixed-rates.html" >Fixed rates sheets/offers</a><a href="current-offers.html" >Current offers</a><a href="https://travel-system.hadysu96.workers.dev/" target="_blank" rel="noopener">Salalah and Umrah blocks tool</a><a href="galileo-pnr.html" >Galileo PNR entries</a><a href="playbook.html" >Sales operations playbook</a><a href="umrah.html" >Umrah information</a><a href="dictionary.html" >KW-EG dictionary</a><a href="https://www.passportindex.org/passport/kuwait/" target="_blank" rel="noopener">Visa index</a><a href="https://travelate-mu.vercel.app/travelate1.html" target="_blank" rel="noopener">Travelate</a><a href="tourism.html" >Tourism information</a></nav>
+</div></header>
+<main><div class="in">
+  <section data-sec><h2>Daily tools</h2><p class="sub">What you open before quoting a client.</p><div class="rule"></div><div class="grid"><a class="tile"  href="fixed-rates.html" data-k="fixed rates sheets offers prices quote"><div class="pic" style="background:#ffffff"><img alt="" loading="lazy" src="assets/fixed-rates.webp" style="object-fit:contain;filter:brightness(1.045)"></div><div class="txt"><b>Fixed rates sheets/offers</b><span class="d">Rate sheets and fixed offers.</span><small>Page in this site</small></div></a><a class="tile"  href="current-offers.html" data-k="current offers blocks packages seats updated"><div class="pic" style="background:#ffffff"><img alt="" loading="lazy" src="assets/current-offers.webp" style="object-fit:contain;filter:brightness(1.045)"></div><div class="txt"><b>Current offers</b><span class="d">Latest offers, blocks and seats.</span><small>Page in this site</small></div></a><a class="tile" target="_blank" rel="noopener" href="https://travel-system.hadysu96.workers.dev/" data-k="salalah umrah blocks tool system"><div class="pic" style="background:#aecdd7"><img alt="" loading="lazy" src="assets/blocks-tool.webp" style="object-fit:cover"></div><div class="txt"><b>Salalah and Umrah blocks tool</b><span class="d">Check group blocks and availability.</span><small>Opens in a new tab</small></div></a><a class="tile"  href="galileo-pnr.html" data-k="gds galileo pnr entries amadeus sabre"><div class="pic" style="background:#ffffff"><img alt="" loading="lazy" src="assets/galileo-pnr.webp" style="object-fit:contain;filter:brightness(1.045)"></div><div class="txt"><b>Galileo PNR entries</b><span class="d">Galileo commands and PNR entries.</span><small>Page in this site</small></div></a></div></section>
+  <section data-sec><h2>Guides and platforms</h2><p class="sub">Background reading and our booking platform.</p><div class="rule"></div><div class="grid five"><a class="tile"  href="playbook.html" data-k="sales operations playbook guidelines rules policy"><div class="pic" style="background:#ffffff"><img alt="" loading="lazy" src="assets/playbook.webp" style="object-fit:contain;filter:brightness(1.045)"></div><div class="txt"><b>Sales operations playbook</b><span class="d">How we sell and handle clients.</span><small>Page in this site</small></div></a><a class="tile"  href="umrah.html" data-k="umrah information knowledge"><div class="pic" style="background:#5d799a"><img alt="" loading="lazy" src="assets/umrah.webp" style="object-fit:cover"></div><div class="txt"><b>Umrah information</b><span class="d">Requirements and key facts for Umrah.</span><small>Page in this site</small></div></a><a class="tile"  href="dictionary.html" data-k="kw eg dictionary kuwaiti egyptian dialect words قاموس"><div class="pic" style="background:#eaf0fb"><img alt="" loading="lazy" src="assets/dictionary.svg" style="object-fit:cover"></div><div class="txt"><b>KW-EG dictionary</b><span class="d">Egyptian words and their Kuwaiti equivalents.</span><small>Page in this site</small></div></a><a class="tile" target="_blank" rel="noopener" href="https://www.passportindex.org/passport/kuwait/" data-k="visa index passport kuwait requirements"><div class="pic" style="background:#283e7a"><img alt="" loading="lazy" src="assets/visa-index.webp" style="object-fit:cover"></div><div class="txt"><b>Visa index</b><span class="d">Visa requirements by passport.</span><small>Opens in a new tab</small></div></a><a class="tile" target="_blank" rel="noopener" href="https://travelate-mu.vercel.app/travelate1.html" data-k="travelate booking platform"><div class="pic" style="background:#21283a"><img alt="" loading="lazy" src="assets/travelate.webp" style="object-fit:cover"></div><div class="txt"><b>Travelate</b><span class="d">Travel, decoded. Our booking platform.</span><small>Opens in a new tab</small></div></a></div></section>
+  <section data-sec><h2>Tourism information</h2><p class="sub">Destinations and hotels for your quotes.</p><div class="rule"></div><a class="tile wide"  href="tourism.html" data-k="tourism information destination atlas hotels cities"><div class="pic" style="background:#e1eaec"><img alt="" loading="lazy" src="assets/tourism.webp" style="object-fit:cover"></div><div class="txt"><b>Tourism information</b><span class="d">Destinations and hotels, city by city.</span><small>Page in this site</small></div></a></section>
+  <div class="empty" id="empty">Nothing matches that search. Try a shorter word, like "umrah" or "rates".</div>
+  <footer>Missing a link or something out of date? Tell your team lead.</footer>
+</div></main>
+<script>
+(function(){
+  var q=document.getElementById('q'),empty=document.getElementById('empty');
+  var tiles=[].slice.call(document.querySelectorAll('a.tile')),secs=[].slice.call(document.querySelectorAll('[data-sec]'));
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase(),shown=0;
+    tiles.forEach(function(t){
+      var ok=!v||(t.textContent+' '+t.getAttribute('data-k')).toLowerCase().indexOf(v)>-1;
+      t.style.display=ok?'':'none'; if(ok)shown++;
+    });
+    secs.forEach(function(s){
+      s.style.display=[].some.call(s.querySelectorAll('a.tile'),function(t){return t.style.display!=='none'})?'':'none';
+    });
+    empty.style.display=shown?'none':'block';
+  });
+})();
+</script>
+</body>
+</html>
