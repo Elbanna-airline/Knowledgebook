@@ -111,3 +111,15 @@ a.tile.wide b{position:relative;z-index:1;margin:0 0 6px 0;padding:9px 18px;bord
 a.tile.wide .d,a.tile.wide small{display:none}
 @media (max-width:600px){a.tile.wide .pic{flex:none;width:100%}a.tile.wide .txt{min-height:200px;padding:16px}a.tile.wide .txt::after{inset-inline-end:26px;bottom:26px}}
 a.tile.wide .txt::before{left:14px;top:14px;right:14px;bottom:14px;width:auto;height:auto;background:none}
+
+/* ---- Tourism row: small square (Tourism Information) + big Atlas banner, no orange frame ---- */
+.tour-row{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:stretch}
+a.tile.tsq .pic::after{display:none!important}
+a.tile.tsq .txt{min-height:0;padding:14px 20px 16px}
+a.tile.tsq .txt::after{bottom:14px}
+a.tile.tbanner{background:#dff0f1 url(atlas-banner.webp) center/cover no-repeat;min-height:0;aspect-ratio:745/286;display:block}
+a.tile.tbanner::before{display:none}
+a.tile.tbanner::after{content:"";position:absolute;inset-inline-start:18px;bottom:18px;width:36px;height:36px;border-radius:50%;background:#07294a center/16px no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 11l6-6M6 5h5v5'/%3E%3C/svg%3E");transition:background-color .25s}
+a.tile.tbanner:hover::after{background-color:#f08418}
+@media (max-width:700px){.tour-row{grid-template-columns:1fr}a.tile.tsq .pic{aspect-ratio:2/1}}
