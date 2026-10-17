@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+:root{--navy:#081a2e;--royal:#1c4f82;--gold:#b8924a;--gold2:#d2b074;--bg:#f2f4f6;--card:#fff;--ink:#14202e;--muted:#5d6b7b;--line:#dde2e8}
+@media (prefers-color-scheme:dark){:root{--bg:#0b121d;--card:#121c2b;--ink:#eef1f6;--muted:#9eabbd;--line:#223047;--royal:#8db8e6;--gold:#d2b074}}
+body{font-family:"Plus Jakarta Sans","Cairo",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* ---- hero ---- */
+.hero{overflow:visible;z-index:30;min-height:620px;padding:36px 28px 48px;
+  background:linear-gradient(180deg,rgba(8,26,46,.30) 0,rgba(8,26,46,.18) 28%,rgba(8,26,46,.80) 74%,#081a2e 100%),url(hero.webp) center top/cover no-repeat,#081a2e}
+.hero .in{max-width:1180px}
+.hero .lock{align-self:flex-start;border-radius:18px;padding:11px 24px;gap:20px;background:rgba(255,255,255,.96);box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.hero .lock img{height:46px}.hero .lock .tw{height:50px}
+.hero .lock .vr{width:1px;height:32px;background:linear-gradient(transparent,var(--gold),transparent)}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;text-shadow:0 2px 40px rgba(0,0,0,.35)}
+.hero h1 i{color:rgba(255,255,255,.62)}
+.hero p{color:rgba(255,255,255,.82);font-size:1.12rem;font-weight:400;max-width:40ch}
+.search input{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;font-weight:500;padding:16px 24px;
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.search input::placeholder{color:rgba(255,255,255,.7)}
+.search input:focus{border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.18)}
+.hero .gnav{align-self:flex-start;max-width:100%}
+
+/* ---- sections ---- */
+main{padding:20px 28px 72px}
+main .in{max-width:1180px}
+section{margin-top:68px}
+h2{font-size:1.55rem;font-weight:700;letter-spacing:-.02em}
+.sub{font-size:.98rem;margin:4px 0 14px}
+.rule{height:1px;margin:0 0 28px;background:linear-gradient(90deg,var(--gold) 0,var(--gold) 44px,var(--line) 44px)}
+.grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.grid.five{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px}
+
+/* ---- cards: logo fills the whole square ---- */
+a.tile{position:relative;border-radius:22px;border:1px solid var(--line);background:var(--card);overflow:hidden;
+  box-shadow:0 1px 1px rgba(8,26,46,.03),0 24px 44px -30px rgba(8,26,46,.38);transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s,border-color .28s}
+a.tile:hover,a.tile:focus-visible{transform:translateY(-6px);border-color:color-mix(in srgb,var(--gold) 55%,var(--line));box-shadow:0 2px 2px rgba(8,26,46,.04),0 40px 60px -32px rgba(8,26,46,.5)}
+a.tile:focus-visible{box-shadow:0 0 0 3px var(--gold2)}
+a.tile .pic{height:auto;aspect-ratio:1/1;padding:0;background:#fff!important;overflow:hidden;position:relative;display:block}
+a.tile .pic::before,a.tile .pic::after{display:none}
+a.tile .pic img{width:100%!important;height:100%!important;max-width:none;aspect-ratio:1;object-fit:cover!important;filter:none!important;border:0;border-radius:0;box-shadow:none;background:none;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+a.tile:hover .pic img{transform:scale(1.05)}
+a.tile .txt{padding:20px 22px 22px;border-top:1px solid var(--line);background:var(--card);display:block;min-height:112px}
+a.tile .txt:before{display:none}
+a.tile b{font-size:1.06rem;font-weight:700;letter-spacing:-.01em;padding-inline-end:44px}
+a.tile .d{font-size:.9rem;margin:5px 0 0;padding-inline-end:44px;line-height:1.5}
+a.tile small{display:block;margin:10px 0 0;padding:0;background:none;color:var(--muted);font-size:.74rem;font-weight:500;letter-spacing:.01em;opacity:.85}
+a.tile small::before{display:none}
+/* arrow chip */
+a.tile .txt::after{content:"";position:absolute;inset-inline-end:18px;bottom:20px;width:36px;height:36px;border-radius:50%;background:#081a2e center/16px no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E");transition:background-color .25s,transform .25s}
+[dir=rtl] a.tile .txt::after{transform:scaleX(-1)}
+a.tile[target=_blank] .txt::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 11l6-6M6 5h5v5'/%3E%3C/svg%3E")}
+a.tile:hover .txt::after{background-color:var(--gold);transform:translateX(3px)}
+@media (prefers-color-scheme:dark){a.tile .txt::after{background-color:#2a3b55}}
+
+/* wide tile */
+a.tile.wide{border-radius:26px;background:#081a2e;border-color:#081a2e;min-height:0}
+a.tile.wide .pic{flex:0 0 min(380px,40%);aspect-ratio:1/1;height:auto}
+a.tile.wide .txt{background:transparent;border:0;display:flex;flex-direction:column;justify-content:center;padding:36px 48px;min-height:0}
+a.tile.wide .txt::after{display:none}
+a.tile.wide b{font-size:2rem;font-weight:800;letter-spacing:-.025em;color:#fff;padding:0}
+a.tile.wide .d{color:rgba(255,255,255,.72);font-size:1.02rem;padding:0;margin-top:10px;max-width:38ch}
+a.tile.wide small{color:var(--gold2);font-size:.82rem;font-weight:600;margin-top:22px;opacity:1}
+a.tile.wide:hover .pic img{transform:scale(1.04)}
+
+footer{margin-top:64px}
+@media (max-width:600px){
+  .hero{min-height:0;padding:22px 16px 30px}
+  .hero .lock img{height:36px}.hero .lock .tw{height:40px}
+  main{padding:8px 16px 48px}
+  .grid,.grid.five{grid-template-columns:repeat(2,1fr);gap:14px}
+  a.tile{border-radius:18px}
+  a.tile .txt{padding:14px 14px 16px;min-height:0}
+  a.tile b{font-size:.95rem;padding-inline-end:0}
+  a.tile .d{display:none}
+  a.tile .txt::after{display:none}
+  a.tile.wide{flex-direction:column}
+  a.tile.wide .pic{flex:none;width:100%}
+  a.tile.wide .txt{padding:24px}
+  a.tile.wide b{font-size:1.5rem}
+  .hero .gnav{align-self:stretch}
+}
+@media (prefers-reduced-motion:reduce){a.tile,a.tile .pic img{transition:none}a.tile:hover,a.tile:hover .pic img{transform:none}}
+.grid.five .pic,.grid .pic{height:auto!important}
