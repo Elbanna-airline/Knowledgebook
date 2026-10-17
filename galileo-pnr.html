@@ -1,30 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#06335c">
-<title>Galileo PNR entries | Knowledge book</title>
+<title>Galileo PNR Entries | Knowledge book</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/inner.css">
+<link rel="stylesheet" href="../assets/page.css">
+<style>
+/* Galileo page: LTR reference, built on the shared page.css */
+.card h2{display:flex;align-items:center;gap:9px}
+.step{display:flex;gap:14px;margin:16px 0;align-items:flex-start}
+.step>div:last-child{flex:1;min-width:0}
+.num{
+  flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.9rem;background:color-mix(in srgb,var(--royal) 14%,var(--card));color:var(--royal);
+}
+.label{font-weight:700;margin-bottom:6px;color:var(--ink)}
+.entry,.cmd code{
+  display:block;font-family:var(--mono);font-size:.88rem;line-height:1.6;
+  background:var(--tint);border:1px solid var(--line);border-radius:8px;padding:10px 14px;
+  white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.cmd{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card)}
+.cmd h3{margin:0 0 8px;font-size:.95rem;color:var(--muted);font-weight:600}
+.smart-fare{margin-top:18px;background:var(--tint)}
+.smart-fare>h3{font-size:1.02rem;color:var(--head);font-weight:700}
+.smart-fare .cmd{background:var(--card)}
+.smart-fare .grid{margin-top:4px}
+.foot{text-align:center;color:var(--muted);font-size:.85rem;margin-top:28px}
+</style>
 </head>
 <body>
-<header class="bar">
-<a class="lock" href="index.html" aria-label="Home"><img src="assets/qgo.png" alt="Q'go Online"><span class="vr"></span><img class="tw" src="assets/tawasul.png" alt="Tawasul"></a>
-<nav aria-label="Pages"><a href="index.html">Home</a><a href="fixed-rates.html">Fixed rates sheets/offers</a><a href="current-offers.html">Current offers</a><a href="https://travel-system.hadysu96.workers.dev/" target="_blank" rel="noopener">Salalah and Umrah blocks tool</a><a href="galileo-pnr.html" class="on" aria-current="page">Galileo PNR entries</a><a href="playbook.html">Sales operations playbook</a><a href="umrah.html">Umrah information</a><a href="dictionary.html">KW-EG dictionary</a><a href="https://www.passportindex.org/passport/kuwait/" target="_blank" rel="noopener">Visa index</a><a href="https://travelate-mu.vercel.app/travelate1.html" target="_blank" rel="noopener">Travelate</a><a href="tourism.html">Tourism information</a></nav>
+<div class="page">
+<header class="page-head">
+  <h1>✈ Galileo PNR Entries</h1>
+  <p>Quick reference — From creating the PNR to ticket issuance</p>
+  <div class="rule"></div>
 </header>
-<main>
-<iframe id="f" title="Galileo PNR entries" allow="clipboard-write" hidden></iframe>
-<div id="miss" hidden><b>This page is ready, but its content file is missing.</b><br>Put the page's HTML file at <code>content/galileo-pnr.html</code> and refresh.</div>
-<noscript><p class="nojs">Please enable JavaScript, or open <a href="content/galileo-pnr.html">this page directly</a>.</p></noscript>
-</main>
-<script>
-var f=document.getElementById('f'),m=document.getElementById('miss'),s='content/galileo-pnr.html';
-function ok(){f.hidden=false;f.src=s}function no(){m.hidden=false}
-fetch(s,{method:'HEAD'}).then(function(r){r.ok?ok():no()}).catch(ok);
-</script>
+
+<section class="card">
+    <h2>🧾 1. Create PNR</h2>
+    <div class="step">
+        <div class="num">1</div>
+        <div>
+            <div class="label">Create Segment / Availability</div>
+            <div class="entry">A20DECKWICAI*KU</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="num">2</div>
+        <div>
+            <div class="label">Add Passenger Name</div>
+            <div class="entry">N.AHMED/MUSTAFA MR</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="num">3</div>
+        <div>
+            <div class="label">Contact / Phone</div>
+            <div class="entry">CM/</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="num">4</div>
+        <div>
+            <div class="label">Ticketing Time Limit</div>
+            <div class="entry">T.T*</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="num">5</div>
+        <div>
+            <div class="label">Received From</div>
+            <div class="entry">R.M+ER</div>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h2>📋 2. SSR & Passenger Details</h2>
+    <div class="grid">
+        <div class="cmd">
+            <h3>Passport — SSR DOCS</h3>
+            <code>SI.P1/SSRDOCSKUHK1/P/KU/BM9843413/KU/13JAN97/F/25JAN25/SAQIB/MARYAM MRS</code>
+        </div>
+        <div class="cmd">
+            <h3>Contact Number — CTCM</h3>
+            <code>SI.P1/SSRCTCMYYHK1/0096591111426</code>
+        </div>
+        <div class="cmd">
+            <h3>Email — CTCE</h3>
+            <code>SI.P1/SSRCTCEYYHK1/operations//tawasul./eg.com</code>
+        </div>
+        <div class="cmd">
+            <h3>Child — CHD</h3>
+            <code>N.VINK/ROB MSTR*P-C08 DOB12JUN15</code>
+        </div>
+        <div class="cmd">
+            <h3>Infant — INF</h3>
+            <code>N.I/SMITH/BABY MSTR*14JUN25</code>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h2>💰 3. Fare / Flight Search</h2>
+    <div class="grid">
+        <div class="cmd">
+            <h3>Search Flight</h3>
+            <code>FSKWI20SEPCAI20NOVKWI</code>
+        </div>
+        <div class="cmd">
+            <h3>Search — 4 Seats</h3>
+            <code>FS4KWI20SEPCAI20NOVKWI</code>
+        </div>
+        <div class="cmd">
+            <h3>Same Class Fare</h3>
+            <code>FQ</code>
+        </div>
+        <div class="cmd">
+            <h3>Lowest Fare in Cabin</h3>
+            <code>FQBB</code>
+        </div>
+        <div class="cmd">
+            <h3>Business</h3>
+            <code>FQBB++-BUSNS</code>
+        </div>
+        <div class="cmd">
+            <h3>First</h3>
+            <code>FQBB++-FIRST</code>
+        </div>
+    </div>
+    <div class="cmd smart-fare">
+        <h3>Galileo Smart Fare :</h3>
+        <div class="smart-fare-grid">
+            <div class="cmd">
+                <h3>One Way</h3>
+                <code>FSKWI10NOVBAH</code>
+            </div>
+            <div class="cmd">
+                <h3>Return Flight</h3>
+                <code>FSKWI10NOVBAH15NOVKWI</code>
+            </div>
+            <div class="cmd">
+                <h3>Direct Flights</h3>
+                <code>FS3KWI10NOVBAH.D</code>
+            </div>
+            <div class="cmd">
+                <h3>Direct Flights with Baggage</h3>
+                <code>FS2KWI10NOVAUH.D++BAG</code>
+            </div>
+            <div class="cmd">
+                <h3>Return Flight with Baggage</h3>
+                <code>FS2KWI10NOVAUH15NOVKWI++BAG</code>
+            </div>
+            <div class="cmd">
+                <h3>FS with Passenger Types</h3>
+                <code>FS3KWI10NOVBAH15NOVKWI+P1.2*CNN.3*CNN.4*INF</code>
+            </div>
+            <div class="cmd">
+                <h3>FS with Passenger Types</h3>
+                <code>FS5KWI10NOVBAH15NOVKWI+P1.2-4*CNN.5*INF.6</code>
+            </div>
+            <div class="cmd">
+                <h3>Economy Fares</h3>
+                <code>FSKWI15AUGDXB20AUGKWI++EK/-ECON</code>
+            </div>
+            <div class="cmd">
+                <h3>First Flight — Business / Second Flight — Economy</h3>
+                <code>FSKWI15AUGCAI-BUSNS/20AUGKWI-ECON++MS</code>
+            </div>
+            <div class="cmd">
+                <h3>First Class</h3>
+                <code>FSKWI15AUGCAI/20AUGKWI++MS/-FIRST</code>
+            </div>
+            <div class="cmd">
+                <h3>Premium Class</h3>
+                <code>FSKWI15AUGCAI/20AUGKWI++MS/-PREME</code>
+            </div>
+            <div class="cmd">
+                <h3>Open Jaw Flight</h3>
+                <code>FSKWI15AUGCAI.D/--IST20AUGKWI.D++MS/-PREME</code>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="card">
+    <h2>🎫 4. Ticket Issuance</h2>
+    <div class="step">
+        <div class="num">1</div>
+        <div>
+            <div class="label">Payment — Cash</div>
+            <div class="entry">TMU1FS</div>
+        </div>
+    </div>
+    <div class="step">
+        <div class="num">2</div>
+        <div>
+            <div class="label">Issue Ticket</div>
+            <div class="entry">TKPDTDAD</div>
+        </div>
+    </div>
+    <div class="callout">
+        ⚠️ Always verify the booking, fare, passenger names, SSR details,
+        payment and ticketing conditions before final issuance.
+    </div>
+</section>
+<section class="card">
+    <h2>🌍 5. Check Airport / City Code</h2>
+    <div class="grid">
+        <div class="cmd">
+            <h3>Search City</h3>
+            <code>.CE CITY</code>
+        </div>
+        <div class="cmd">
+            <h3>Example — Dubai</h3>
+            <code>.CEDUBAI</code>
+        </div>
+    </div>
+</section>
+<p class="foot">Galileo Quick Reference • PNR Creation → SSR → Fare → Payment → Ticket Issuance</p>
+
+</div>
 </body>
 </html>
