@@ -1,7 +1,10 @@
 import { put, list } from '@vercel/blob';
 // Finds the Blob token even if the store was connected with a custom prefix (e.g. STORAGE_READ_WRITE_TOKEN).
 const TOKEN = () => {
-  const raw = process.env.BLOB_READ_WRITE_TOKEN || process.env[Object.keys(process.env).find((k) => /READ_WRITE_TOKEN$/.test(k)) || ''] || '';
+  const keys = Object.keys(process.env).filter((k) => /READ_WRITE_TOKEN$/.test(k));
+  // Prefer a custom-prefixed token (e.g. PUB_READ_WRITE_TOKEN) over the old BLOB_ one.
+  const k = keys.find((x) => x !== 'BLOB_READ_WRITE_TOKEN') || keys[0];
+  const raw = (k && process.env[k]) || '';
   return String(raw).trim().replace(/^['"]+|['"]+$/g, '').trim();
 };
 export const authed = (req) => !!process.env.ADMIN_PASSWORD && req.headers['x-admin-password'] === process.env.ADMIN_PASSWORD;
