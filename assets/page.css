@@ -136,3 +136,59 @@ a:hover{color:var(--gold)}
 .extlink{margin:14px 0}
 .extlink a{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;background:#0860aa;color:#fff!important;text-decoration:none;font-weight:700}
 .extlink a:hover{background:#f08418}
+
+/* tap-to-play social card (TikTok / Instagram / Facebook) */
+.social{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin:14px auto;padding:34px 20px;max-width:360px;min-height:220px;border-radius:16px;background:linear-gradient(160deg,#07294a,#0b4a7d);color:#fff;text-align:center}
+.social.ig{background:linear-gradient(160deg,#5b2a86,#c13584 55%,#f08418)}
+.social.tt{background:linear-gradient(160deg,#0b0b0f,#1c2b3a)}
+.social .slbl{font-weight:800;font-size:1.25rem;letter-spacing:.01em}
+.social .splay,.social .sopen{font:700 .95rem Cairo,system-ui,sans-serif;border-radius:999px;padding:10px 22px;cursor:pointer;text-decoration:none;border:0;line-height:1.2}
+.social .splay{background:#fff;color:#07294a}
+.social .splay:hover{background:#f08418;color:#fff}
+.social .sopen{background:rgba(255,255,255,.16);color:#fff!important;border:1px solid rgba(255,255,255,.5)}
+.social .sopen:hover{background:rgba(255,255,255,.3)}
+
+
+/* ================= v17: free layout (used by the advanced page editor) ================= */
+/* side-by-side rows: children carry an inline --w (percent) */
+.kb-row{display:flex;flex-wrap:wrap;column-gap:16px;align-items:flex-start;margin:0}
+.kb-row>*{flex:0 0 100%;max-width:100%;min-width:0}
+.kb-row>[style*="--w"]{flex:0 0 calc(var(--w)*1% - 16px*(100 - var(--w))/100)}
+.kb-row>.card{align-self:stretch}
+@media (max-width:700px){.kb-row>[style*="--w"]{flex-basis:100%}}
+
+/* alignment of narrower blocks */
+[data-al=center]{margin-inline:auto!important}
+[data-al=start]{margin-inline-end:auto!important}
+[data-al=end]{margin-inline-start:auto!important}
+
+/* card looks */
+.card.kb-v-soft{background:color-mix(in srgb,var(--royal) 6%,var(--card))}
+.card.kb-v-accent{border-top:4px solid var(--gold)}
+.card.kb-v-dark{background:linear-gradient(160deg,#07294a,#0b4a7d);color:#fff;border-color:transparent;--head:#fff}
+.card.kb-v-dark a{color:#ffd29b}
+.card.kb-v-outline{box-shadow:none;background:transparent;border:2px solid var(--line)}
+.card.kb-v-plain{box-shadow:none;background:transparent;border-color:transparent}
+
+/* callout colours */
+.callout.kb-c-ok{background:color-mix(in srgb,var(--ok) 10%,var(--card));border-color:color-mix(in srgb,var(--ok) 35%,var(--line));border-inline-start-color:var(--ok)}
+.callout.kb-c-red{background:color-mix(in srgb,var(--red) 9%,var(--card));border-color:color-mix(in srgb,var(--red) 32%,var(--line));border-inline-start-color:var(--red)}
+.callout.kb-c-blue{background:color-mix(in srgb,var(--royal) 9%,var(--card));border-color:color-mix(in srgb,var(--royal) 32%,var(--line));border-inline-start-color:var(--royal)}
+
+/* misc blocks */
+figure.kb-fig{margin:14px 0}
+figure.kb-fig img{margin:0}
+figure.kb-fig figcaption{margin-top:8px;font-size:.88rem;color:var(--muted);text-align:center}
+hr.kb-hr{border:0;height:1px;margin:22px 0;background:var(--line)}
+.kb-sp{height:32px}
+blockquote.kb-q{margin:16px 0;padding:6px 18px;border-inline-start:4px solid var(--gold);color:var(--muted);font-size:1.05rem}
+details.kb-d{margin:14px 0;border:1px solid var(--line);border-radius:14px;padding:10px 18px;background:var(--card)}
+details.kb-d summary{cursor:pointer;font-weight:700;color:var(--head)}
+table.kb-t{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}
+table.kb-t td,table.kb-t th{border:1px solid var(--line);padding:9px 12px;text-align:start;vertical-align:top}
+table.kb-t th{background:var(--tint);font-weight:700}
+.vslot{display:none}
+.extlink.kb-b2 a{background:#f08418}
+.extlink.kb-b3 a{background:#1e8e5a}
+.extlink.kb-b4 a{background:transparent;color:var(--royal)!important;border:2px solid var(--royal)}
+.video.r43{aspect-ratio:4/3}.video.r11{aspect-ratio:1/1}.video.r916{aspect-ratio:9/16;max-width:360px;margin-inline:auto}.video.r219{aspect-ratio:21/9}
