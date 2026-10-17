@@ -34,8 +34,8 @@ function shrink(f){return new Promise(function(ok,no){var m=new Image();m.onload
 function addImg(){var i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=true;
   i.onchange=async function(){for(var k=0;k<i.files.length;k++){var f=i.files[k];try{
     var r=await fetch('/api/upload?name='+encodeURIComponent(f.name),{method:'POST',headers:{'x-admin-password':pw,'Content-Type':'application/octet-stream'},body:await shrink(f)});
-    var j=await r.json();if(!r.ok)throw 0;var im=document.createElement('img');im.src=j.url;im.alt=f.name.replace(/\.\w+$/,'');im.loading='lazy';put(im)
-  }catch(e){alert('فشل رفع '+f.name)}}};i.click()}
+    var j=await r.json();if(!r.ok)throw new Error(j.error||r.status);var im=document.createElement('img');im.src=j.url;im.alt=f.name.replace(/\.\w+$/,'');im.loading='lazy';put(im)
+  }catch(e){alert('فشل رفع '+f.name+'\n'+(e.message||''))}}};i.click()}
 function addVid(){var u=(prompt('الصق رابط الفيديو (YouTube أو Google Drive أو mp4 مباشر):')||'').trim();if(!u)return;
   var d=document.createElement('div'),m;d.className='video';
   if(m=u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/))d.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m[1]+'" title="فيديو" allowfullscreen loading="lazy"></iframe>';
@@ -52,11 +52,11 @@ async function save(){
   var t=root.cloneNode(true);t.querySelectorAll('.kb-sel').forEach(function(n){n.classList.remove('kb-sel')});
   t.removeAttribute('contenteditable');t.classList.remove('kb-on');var html=clean(t.innerHTML);
   try{var r=await fetch(API,{method:'PUT',headers:{'x-admin-password':pw,'Content-Type':'application/json'},body:JSON.stringify({html:html})});
-    if(!r.ok)throw 0;root.innerHTML=html;exit();toast('تم الحفظ ✓')}catch(e){alert('فشل الحفظ، حاول تاني')}}
+    if(!r.ok){var j={};try{j=await r.json()}catch(x){}throw new Error(j.error||('HTTP '+r.status))}root.innerHTML=html;exit();toast('تم الحفظ ✓')}catch(e){alert('فشل الحفظ:\n'+(e.message||e))}}
 async function enter(){
   if(!pw){pw=prompt('كلمة سر التعديل:')||'';if(!pw)return}
   var r;try{r=await fetch(API,{method:'POST',headers:{'x-admin-password':pw}})}catch(e){r={ok:false,status:0}}
-  if(!r.ok){pw='';sessionStorage.removeItem('kb_pw');return alert(r.status==401?'كلمة السر غير صحيحة':'السيرفر مش جاهز: راجع إعداد Blob وكلمة السر على فيركل')}
+  if(!r.ok){pw='';sessionStorage.removeItem('kb_pw');var m='';try{m=(await r.json()).error}catch(x){}return alert(m||(r.status==404?'فولدر api مش مرفوع على GitHub':'السيرفر مش جاهز (HTTP '+r.status+')'))}
   sessionStorage.setItem('kb_pw',pw);backup=root.innerHTML;root.contentEditable='true';root.classList.add('kb-on');bar.hidden=false;fab.hidden=true}
 
 var bar=document.createElement('div');bar.className='kb-bar';bar.hidden=true;
