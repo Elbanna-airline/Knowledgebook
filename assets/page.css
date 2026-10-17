@@ -103,3 +103,15 @@ pre.msg{
 /* video blocks (added from the editor) */
 .video{position:relative;aspect-ratio:16/9;margin:14px 0;border-radius:10px;overflow:hidden;background:#000;border:1px solid var(--line)}
 .video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---------- refreshed cards ---------- */
+.card{border-radius:18px;border-color:color-mix(in srgb,var(--line) 70%,transparent);padding:24px 28px;
+  box-shadow:0 1px 2px rgba(22,29,46,.04),0 16px 32px -20px rgba(22,29,46,.35);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold),var(--gold2) 60%,transparent)}
+h2{border-inline-start:0;padding-inline-start:0;display:flex;align-items:center;gap:10px}
+h2::before{content:"";flex:none;width:8px;height:22px;border-radius:99px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.card img,.gallery img{border-radius:14px;box-shadow:0 10px 22px -14px rgba(22,29,46,.45)}
+.callout{border-radius:14px}
+pre.msg{border-radius:14px}
+.todo{border-radius:14px}
+@media (max-width:600px){.card{padding:18px 18px}}

@@ -9,13 +9,16 @@ body{display:flex;flex-direction:column;font-family:"Cairo",system-ui,-apple-sys
 .lock img{height:32px;width:auto;display:block}
 .lock .tw{height:36px}
 .vr{width:2px;height:26px;background:#f5891f;border-radius:2px}
-nav{display:flex;gap:8px;overflow-x:auto;padding:4px 2px;scrollbar-width:thin}
-nav a{flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:.86rem;padding:8px 14px;border:2px solid #fff;border-radius:12px;background:#0860aa;white-space:nowrap}
-nav a:hover,nav a:focus-visible{background:#f5891f;outline:none}
-nav a:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.7)}
-nav a.on{background:#f5891f}
 main{flex:1;min-height:0;position:relative}
 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--bg)}
 #miss{max-width:560px;margin:60px auto;padding:28px;background:var(--card);border:1px dashed var(--line);border-radius:12px;line-height:1.7}
 #miss code{background:var(--bg);padding:2px 7px;border-radius:5px;direction:ltr;unicode-bidi:embed}
 @media (max-width:700px){.bar{flex-direction:column;align-items:stretch;gap:10px;padding:10px 12px}.lock{align-self:flex-start}}
+
+/* refreshed top bar (glass nav) */
+.bar{position:relative;z-index:20;background:linear-gradient(115deg,#06335c 0%,#0a4573 55%,#0b6a8f 100%);border-bottom:0;padding:12px 18px;box-shadow:0 10px 26px -16px rgba(0,30,60,.7)}
+.bar::after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,#f5891f,#ffa24a 40%,rgba(255,162,74,0))}
+.lock{border-radius:16px;padding:7px 16px;background:rgba(255,255,255,.96);box-shadow:0 8px 20px -10px rgba(0,20,45,.6)}
+.vr{width:1px;background:linear-gradient(transparent,#f5891f,transparent)}
+.bar .gnav{flex:1 1 auto;min-width:0}
+main{z-index:1}

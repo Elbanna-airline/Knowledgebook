@@ -1,0 +1,38 @@
+/* Glass navigation: pill buttons + "All pages" dropdown (shared by home and inner pages) */
+.gnav{position:relative;display:flex;align-items:center;gap:10px;max-width:100%;padding:8px;border-radius:24px;
+  background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.12));
+  border:1px solid rgba(255,255,255,.42);
+  -webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);
+  box-shadow:0 14px 34px -16px rgba(0,30,60,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+.gnav .pillrow{flex:1 1 auto;min-width:0;display:flex;gap:8px;overflow-x:auto;padding:2px;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.gnav .pillrow::-webkit-scrollbar{display:none}
+.gnav a.pill,.gnav button.menu-btn{flex:none;font:inherit;font-weight:700;font-size:.9rem;line-height:1;white-space:nowrap;cursor:pointer;text-decoration:none;
+  color:#fff;padding:11px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.16);text-shadow:0 1px 8px rgba(0,30,60,.35);
+  transition:background .16s,color .16s,transform .16s,box-shadow .16s}
+.gnav a.pill:hover,.gnav button.menu-btn:hover{background:rgba(255,255,255,.34)}
+.gnav a.pill.on{background:#fff;color:#06335c;border-color:#fff;text-shadow:none;box-shadow:0 6px 16px -6px rgba(0,30,60,.5)}
+.gnav :is(a.pill,button.menu-btn):focus-visible{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.75)}
+.gnav button.menu-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(6,51,92,.55);border-color:rgba(255,255,255,.35)}
+.gnav button.menu-btn svg{width:14px;height:14px;transition:transform .2s}
+.gnav button.menu-btn[aria-expanded=true]{background:#fff;color:#06335c;text-shadow:none}
+.gnav button.menu-btn[aria-expanded=true] svg{transform:rotate(180deg)}
+.gmenu{position:absolute;top:calc(100% + 10px);inset-inline-start:0;z-index:100;width:min(420px,calc(100vw - 24px));max-height:min(70vh,560px);overflow:auto;
+  padding:10px;border-radius:22px;background:rgba(7,38,70,.86);border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
+  box-shadow:0 28px 60px -20px rgba(0,20,45,.7);animation:gm .16s ease-out}
+@keyframes gm{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.gmenu h6{margin:10px 12px 6px;font:700 .78rem/1 inherit;color:#9fc6e6;letter-spacing:.02em}
+.gmenu h6:first-child{margin-top:4px}
+.gmenu a{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;color:#fff;text-decoration:none;font-weight:600;font-size:.94rem}
+.gmenu a:hover,.gmenu a:focus-visible{background:rgba(255,255,255,.14);outline:none}
+.gmenu a.on{background:rgba(255,255,255,.95);color:#06335c}
+.gmenu a img{flex:none;width:38px;height:38px;border-radius:11px;object-fit:cover;background:#fff;border:1px solid rgba(255,255,255,.5)}
+.gmenu a span{flex:1;min-width:0;line-height:1.25}
+.gmenu a small{display:block;font-weight:400;font-size:.76rem;opacity:.7;margin-top:2px}
+.gmenu a svg{flex:none;width:14px;height:14px;opacity:.6}
+@media (max-width:700px){.gnav{border-radius:20px;padding:6px}.gnav a.pill,.gnav button.menu-btn{padding:10px 16px;font-size:.86rem}.gmenu{inset-inline-start:-0px}}
+@media (prefers-reduced-motion:reduce){.gmenu{animation:none}.gnav *{transition:none!important}}
+nav.gnav{overflow:visible;padding:8px}
+nav.gnav{display:flex;gap:10px;padding:8px}
