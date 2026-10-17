@@ -3,7 +3,7 @@
 var root=document.querySelector('.page');if(!root)return;
 var slug=(location.pathname.split('/').pop()||'').replace('.html',''),API='/api/page?slug='+encodeURIComponent(slug),
 pw=sessionStorage.getItem('kb_pw')||'',backup='',sel=null;
-var IF=/^(https:\/\/(www\.youtube-nocookie\.com\/embed\/|drive\.google\.com\/file\/d\/[\w-]+\/preview)|\.\.\/assets\/)/;
+var IF=/^(https:\/\/(www\.youtube-nocookie\.com\/embed\/|drive\.google\.com\/file\/d\/[\w-]+\/preview|www\.facebook\.com\/plugins\/video\.php\?href=|www\.tiktok\.com\/embed\/v2\/\d+|www\.instagram\.com\/(p|reel|tv)\/[\w-]+\/embed)|\.\.\/assets\/)/;
 function clean(h){
   var box=new DOMParser().parseFromString('<div>'+h+'</div>','text/html').body.firstChild;
   box.querySelectorAll('script,style,object,embed,link,meta,form').forEach(function(n){n.remove()});
@@ -36,12 +36,26 @@ function addImg(){var i=document.createElement('input');i.type='file';i.accept='
     var r=await fetch('/api/upload?name='+encodeURIComponent(f.name),{method:'POST',headers:{'x-admin-password':pw,'Content-Type':'application/octet-stream'},body:await shrink(f)});
     var j=await r.json();if(!r.ok)throw new Error(j.error||r.status);var im=document.createElement('img');im.src=j.url;im.alt=f.name.replace(/\.\w+$/,'');im.loading='lazy';put(im)
   }catch(e){alert('فشل رفع '+f.name+'\n'+(e.message||''))}}};i.click()}
-function addVid(){var u=(prompt('الصق رابط الفيديو (YouTube أو Google Drive أو mp4 مباشر):')||'').trim();if(!u)return;
-  var d=document.createElement('div'),m;d.className='video';
-  if(m=u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/))d.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m[1]+'" title="فيديو" allowfullscreen loading="lazy"></iframe>';
-  else if(m=u.match(/drive\.google\.com\/file\/d\/([\w-]+)/))d.innerHTML='<iframe src="https://drive.google.com/file/d/'+m[1]+'/preview" title="فيديو" allowfullscreen loading="lazy"></iframe>';
-  else if(/^https:\/\/\S+\.(mp4|webm)(\?\S*)?$/i.test(u)){var v=document.createElement('video');v.controls=true;v.preload='metadata';v.src=u;d.appendChild(v)}
-  else return alert('الرابط غير مدعوم');
+var YT=/(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([\w-]{11})/,IG=/instagram\.com\/(?:[\w.]+\/)?(p|reel|reels|tv)\/([\w-]+)/,TTV=/tiktok\.com\/(?:@[\w.\-]+\/)?(?:video|embed(?:\/v2)?|v)\/(\d+)/;
+function vidInfo(u){var h,m;try{h=new URL(u).hostname.replace(/^(www|m|web|mobile)\./,'')}catch(e){return null}
+  if(/^(youtube\.com|youtube-nocookie\.com|youtu\.be)$/.test(h)&&(m=u.match(YT)))return{src:'https://www.youtube-nocookie.com/embed/'+m[1],t:'YouTube'};
+  if(h==='drive.google.com'&&(m=u.match(/\/file\/d\/([\w-]+)/)))return{src:'https://drive.google.com/file/d/'+m[1]+'/preview',t:'Google Drive'};
+  if(/(^|\.)tiktok\.com$/.test(h)){if(m=u.match(TTV))return{src:'https://www.tiktok.com/embed/v2/'+m[1],c:'tt',t:'TikTok'};return{short:/^(vm|vt)\.tiktok\.com$/.test(h)||/tiktok\.com\/t\//.test(u),t:'TikTok'}}
+  if(h==='instagram.com'&&(m=u.match(IG)))return{src:'https://www.instagram.com/'+(m[1]==='reels'?'reel':m[1])+'/'+m[2]+'/embed',c:'ig',t:'Instagram'};
+  if(h==='fb.watch'||h==='facebook.com'||h==='fb.com'){if(h==='fb.watch'||/(\/videos?\/|\/reel\/|\/watch\/?|\/share\/[vr]\/|[?&]v=\d)/.test(u)){var v=/\/reel\/|\/share\/r\//.test(u);
+    return{src:'https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(u)+'&show_text=false&width='+(v?360:560),c:v?'fbv':'',t:'Facebook'}}return{t:'Facebook'}}
+  if(h==='instagram.com')return{t:'Instagram'};
+  return{t:h}}
+async function addVid(){var u=(prompt('الصق رابط الفيديو أو أي رابط (YouTube / Facebook / TikTok / Instagram / Google Drive / mp4):')||'').trim();if(!u)return;
+  if(!/^https?:\/\//i.test(u)){if(/^[\w-]+(\.[\w-]+)+(\/|$)/.test(u))u='https://'+u;else return alert('الرابط غير صحيح')}
+  var d=document.createElement('div'),i=vidInfo(u);if(!i)return alert('الرابط غير صحيح');
+  if(i.short){try{var r=await fetch('/api/resolve?u='+encodeURIComponent(u),{headers:{'x-admin-password':pw}}),j=await r.json(),m=(j.url||'').match(TTV);
+    if(m)i={src:'https://www.tiktok.com/embed/v2/'+m[1],c:'tt',t:'TikTok'}}catch(e){}}
+  if(i.src){d.className='video'+(i.c?' '+i.c:'');var f=document.createElement('iframe');f.src=i.src;f.title=i.t;f.allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+    f.allowFullscreen=true;f.loading='lazy';d.appendChild(f)}
+  else if(/^https:\/\/\S+\.(mp4|webm)(\?\S*)?$/i.test(u)){d.className='video';var v=document.createElement('video');v.controls=true;v.preload='metadata';v.src=u;d.appendChild(v)}
+  else{d.className='extlink';var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.textContent='🔗 افتح على '+i.t;d.appendChild(a);
+    if(i.short||/^(TikTok|Facebook|Instagram)$/.test(i.t))toast('الرابط ده مش فيديو قابل للتضمين، اتضاف كزرار رابط')}
   put(d)}
 function addCard(){var d=document.createElement('div');d.className='card';d.innerHTML='<h2>عنوان جديد</h2><p>اكتب هنا...</p>';put(d)}
 function del(){if(sel&&root.contains(sel)&&confirm('حذف العنصر المحدد؟')){sel.remove();sel=null}}

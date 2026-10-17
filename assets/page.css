@@ -128,3 +128,11 @@ pre.msg{border-radius:14px;border-inline-start:3px solid var(--gold)}
 a{color:var(--royal)}
 a:hover{color:var(--gold)}
 @media (max-width:600px){.page{padding:26px 14px 56px}.card{padding:20px 18px;border-radius:16px}}
+
+/* social embeds (Facebook / TikTok / Instagram) and generic link buttons */
+.video.tt{aspect-ratio:9/19;max-width:340px;margin-inline:auto}
+.video.ig{aspect-ratio:9/17;max-width:400px;margin-inline:auto}
+.video.fbv{aspect-ratio:9/16;max-width:360px;margin-inline:auto}
+.extlink{margin:14px 0}
+.extlink a{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;background:#0860aa;color:#fff!important;text-decoration:none;font-weight:700}
+.extlink a:hover{background:#f08418}
