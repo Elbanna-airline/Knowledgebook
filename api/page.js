@@ -1,4 +1,4 @@
-import { authed, save, read, checkEnv } from './_lib.js';
+import { authed, save, read, checkEnv, hasToken } from './_lib.js';
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   try {
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     if (!slug) return res.status(400).json({ error: 'slug مفقود' });
     const path = `pages/${slug}.json`;
     if (req.method === 'GET') {
-      if (!process.env.BLOB_READ_WRITE_TOKEN) return res.status(200).json({ html: null });
+      if (!hasToken()) return res.status(200).json({ html: null });
       const r = await read(path);
       return res.status(200).json(r ? await r.json() : { html: null });
     }
